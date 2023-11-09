@@ -1,7 +1,7 @@
 <?php
 
 
-class CheckUpType extends BaseController
+class CheckUpTypeController extends BaseController
 {
 
     public function listType ()
@@ -11,14 +11,50 @@ class CheckUpType extends BaseController
         $arrQueryStringParams = $this->getQueryStringParams();
         if (strtoupper($requestMethod) == 'GET') {
             try {
-                $userModel = new UserModel();
-                $intLimit = 10;
+                $CheckUpType = new CheckUpTypeModel();
+                $intLimit = 0;
                 if (isset($arrQueryStringParams['limit']) && $arrQueryStringParams['limit']) {
                     $intLimit = $arrQueryStringParams['limit'];
                 }
-                $arrUsers = $userModel->getCheckUpType($intLimit);
+                $arrUsers = $CheckUpType->getCheckUpType($intLimit);
                 $responseData = json_encode($arrUsers);
             } catch (Error $e) {
+                $strErrorDesc = $e->getMessage().'Something went wrong! Please contact support.';
+                $strErrorHeader = 'HTTP/1.1 500 Internal Server Error';
+            }
+        } else {
+            $strErrorDesc = 'Method not supported';
+            $strErrorHeader = 'HTTP/1.1 422 Unprocessable Entity';
+        }
+        // send output 
+        if (!$strErrorDesc) {
+            $this->sendOutput(
+                $responseData,
+                array('Content-Type: application/json', 'HTTP/1.1 200 OK')
+            );
+        } else {
+            $this->sendOutput(json_encode(array('error' => $strErrorDesc)), 
+                array('Content-Type: application/json', $strErrorHeader)
+            );
+        }
+    }
+    public function getTypeByID()
+    {
+        $strErrorDesc = '';
+        $requestMethod = $_SERVER["REQUEST_METHOD"];
+        $arrQueryStringParams = $this->getQueryStringParams();
+        if(strtoupper($requestMethod) == "GET") {
+            try {
+                $CheckUpType = new CheckUpTypeModel();
+                $idCheck = 1;
+                if (isset($arrQueryStringParams['id']) && $arrQueryStringParams['id']) {
+                    $idCheck = $arrQueryStringParams['id'];
+                }
+                $type = $CheckUpType->getType($idCheck);
+                $responseData = json_encode($type);
+                
+            }
+            catch (Error $e) {
                 $strErrorDesc = $e->getMessage().'Something went wrong! Please contact support.';
                 $strErrorHeader = 'HTTP/1.1 500 Internal Server Error';
             }

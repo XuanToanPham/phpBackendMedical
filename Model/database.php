@@ -27,8 +27,6 @@
                 
                 $stmt = $this->executeStatement($query, $params);
                 $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
-                print_r ($result);
-                print_r ($stmt);
                 $stmt->close();
                 return $result;
             } catch (Exception $e) {
