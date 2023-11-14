@@ -19,6 +19,7 @@ class CatController extends BaseController
         $strErrorDesc = '';
         $strErrorHeader = '';
         $requestMethod = $_SERVER["REQUEST_METHOD"];
+        $responseData = '';
         $cat = new CatsModel();
         if ($requestMethod === "POST") {
 
@@ -51,6 +52,7 @@ class CatController extends BaseController
     {
         $strErrorDesc = '';
         $strErrorHeader = '';
+        $responseData = "";
         $requestMethod = $_SERVER["REQUEST_METHOD"];
         $cat = new CatsModel();
         if ($requestMethod === "GET") {
@@ -94,6 +96,39 @@ class CatController extends BaseController
 
                 }
             } catch (Error $e) {
+                $strErrorDesc = $e->getMessage() . 'Something went wrong! Please contact support.';
+                $strErrorHeader = 'HTTP/1.1 500 Internal Server Error';
+            }
+        } else {
+            $strErrorDesc = 'Method not supported';
+            $strErrorHeader = 'HTTP/1.1 422 Unprocessable Entity';
+        }
+        $this->responseData($strErrorDesc, $strErrorHeader, $responseData);
+    }
+
+    public function deleteInfoCatByCatID()
+    {
+        $strErrorDesc = '';
+        $strErrorHeader = '';
+        $responseData = [];
+        $requestMethod = $_SERVER["REQUEST_METHOD"];
+        $arrQueryStringParams = $this->getQueryStringParams();
+        $cat = new CatsModel();
+        if($requestMethod === "DELETE") {
+            try {
+                $delId = 0;
+                if (isset($arrQueryStringParams['id']) && $arrQueryStringParams['id']) {
+                    $delId = $arrQueryStringParams['id'];
+                    $cat->deleteInfoCatById($delId);
+                    $responseData = json_encode(['Message'=>"Delete Successfully!"]);
+                }
+                else 
+                {
+                    $strErrorDesc = 'Undefined Parameter';
+                    $strErrorHeader = 'HTTP/1.1 422 Unprocessable Entity';
+                }
+            }
+            catch (Error $e) {
                 $strErrorDesc = $e->getMessage() . 'Something went wrong! Please contact support.';
                 $strErrorHeader = 'HTTP/1.1 500 Internal Server Error';
             }

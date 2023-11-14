@@ -14,7 +14,8 @@ $routes = [
     'cat' => [
         'addCat' => 'CatController@addCat',
         'queryAll' => 'CatController@queryAllCat',
-        'queryByOwnerId' => 'CatController@queryAllCatByIdOwner'
+        'queryByOwnerId' => 'CatController@queryAllCatByIdOwner',
+        'deleteInfoCat' => 'CatController@deleteInfoCatByCatID'
     ]
 ];
 if (isset($uri[3]) && isset($uri[4]) && isset($routes[$uri[3]][$uri[4]])) {

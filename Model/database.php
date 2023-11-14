@@ -34,13 +34,11 @@
             }
             return false;
         }
-        public function insert($query = "", $params = [])
+        public function CUD($query = "", $params = [])
         {
-            
             try {
                 
                 $stmt = $this->executeStatement($query, $params);
-                // $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
                 $stmt->close();
                 return $stmt;
             } catch (Exception $e) {
