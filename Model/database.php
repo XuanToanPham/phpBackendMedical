@@ -34,15 +34,31 @@
             }
             return false;
         }
+        public function insert($query = "", $params = [])
+        {
+            
+            try {
+                
+                $stmt = $this->executeStatement($query, $params);
+                // $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+                $stmt->close();
+                return $stmt;
+            } catch (Exception $e) {
+                throw new Exception($e->getMessage());
+            }
+            return false;
+        }
         private function executeStatement($query = "", $params = [])
         {
             try {
                 $stmt = $this->connection->prepare($query);
+                $styleParam = $params[0];
+                array_splice ($params, 0 , 1);
                 if ($stmt === false) {
                     throw new Exception("Unable to do prepared statement: " . $query);
                 }
                 if ($params) {
-                    $stmt->bind_param($params[0], $params[1]);
+                    $stmt->bind_param($styleParam, ...$params);
                 }
                 $stmt->execute(); // thực thi truy vấn
                 return $stmt;
