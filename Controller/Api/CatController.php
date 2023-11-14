@@ -14,6 +14,19 @@ class CatController extends BaseController
             );
         }
     }
+    public function calculateAge($birthdate) {
+        // Tạo đối tượng DateTime từ chuỗi ngày sinh
+        $birthDate = new DateTime($birthdate);
+    
+        // Tạo đối tượng DateTime từ ngày hiện tại
+        $currentDate = new DateTime();
+    
+        // Tính toán sự chênh lệch giữa ngày sinh và ngày hiện tại
+        $age = $currentDate->diff($birthDate);
+    
+        // Lấy giá trị tuổi
+        return $age->y;
+    }
     public function addCat()
     {
         $strErrorDesc = '';
@@ -28,13 +41,14 @@ class CatController extends BaseController
                 $InfoCat = [
                     "cat_id" => (int)$_POST["cat_id"],
                     "name" => strip_tags($_POST["name"]),
-                    'age' => (int)$_POST["age"],
+                    'age' => (int)$this->calculateAge($birthdate->format("Y-m-d H:i:s")),
                     'weight' => (float)$_POST["weight"],
                     'birthdate' => $birthdate->format("Y-m-d H:i:s"),
                     'color' => strip_tags($_POST["color"]),
                     'gender' => strip_tags($_POST['gender']),
                     'owner_id' => $_POST['owner_id'] === '' ? null : $_POST['owner_id']
                 ];
+                echo json_encode($InfoCat);
                 $cat->addNewCat($InfoCat);
                 $responseData = json_encode(['Message' => 'Thêm mèo thành công']);
             } catch (Error $e) {
@@ -136,6 +150,53 @@ class CatController extends BaseController
             $strErrorDesc = 'Method not supported';
             $strErrorHeader = 'HTTP/1.1 422 Unprocessable Entity';
         }
+        $this->responseData($strErrorDesc, $strErrorHeader, $responseData);
+    }
+
+    public function updateInfoCat()
+    {
+        
+        $strErrorDesc = '';
+        $strErrorHeader = '';
+        $responseData = [];
+        $requestMethod = $_SERVER["REQUEST_METHOD"];
+        $arrQueryStringParams = $this->getQueryStringParams();
+        $cat = new CatsModel();
+        if ($requestMethod === "POST") {
+
+            try {
+                $birthdate = new DateTime($_POST["birthdate"]);
+                $InfoCat = [
+                    "cat_id" => (int)$_POST["cat_id"],
+                    "name" => strip_tags($_POST["name"]),
+                    'age' => (int)$this->calculateAge($birthdate->format("Y-m-d H:i:s")),
+                    'weight' => (float)$_POST["weight"],
+                    'birthdate' => $birthdate->format("Y-m-d H:i:s"),
+                    'color' => strip_tags($_POST["color"]),
+                    'gender' => strip_tags($_POST['gender']),
+                    'owner_id' => $_POST['owner_id'] === '' ? null : $_POST['owner_id']
+                ];
+                $catId = 0;
+                if (isset($arrQueryStringParams['id']) && $arrQueryStringParams['id']) {
+                    $catId = $arrQueryStringParams['id'];
+                    $cat->updateCatInfo($InfoCat, $catId);
+                    $responseData = json_encode(['Message' => 'Cập nhật thông tin thành công']);
+
+                }
+                else {
+                    $strErrorDesc = 'Undefined Parameter';
+                    $strErrorHeader = 'HTTP/1.1 422 Unprocessable Entity';
+
+                }
+            } catch (Error $e) {
+                $strErrorDesc = $e->getMessage() . 'Something went wrong! Please contact support.';
+                $strErrorHeader = 'HTTP/1.1 500 Internal Server Error';
+            }
+        } else {
+            $strErrorDesc = 'Method not supported';
+            $strErrorHeader = 'HTTP/1.1 422 Unprocessable Entity';
+        }
+        // send output 
         $this->responseData($strErrorDesc, $strErrorHeader, $responseData);
     }
 }
