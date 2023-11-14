@@ -6,6 +6,13 @@
             VALUES (?, ?, ?, ?, ?, ?)", 
             ["ssssii", $catInfo['name'], $catInfo['birthdate'], $catInfo['color'], $catInfo['gender'], $catInfo['weight'], $catInfo['owner_id']]);
         }
+        public function queryFullListCat () {
+            return $this -> select("SELECT * FROM cats", []);
+        }
+
+        public function queryFullListCatByOwnerID ($id) {
+            return $this -> select("SELECT * FROM cats WHERE owner_id = ?", ['i', $id]);
+        }
     }
 
 ?>

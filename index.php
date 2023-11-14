@@ -12,10 +12,11 @@ $routes = [
         'typeID' => 'CheckUpTypeController@getTypeByID'
     ],
     'cat' => [
-        'addCat' => 'CatController@addCat'
+        'addCat' => 'CatController@addCat',
+        'queryAll' => 'CatController@queryAllCat',
+        'queryByOwnerId' => 'CatController@queryAllCatByIdOwner'
     ]
 ];
-
 if (isset($uri[3]) && isset($uri[4]) && isset($routes[$uri[3]][$uri[4]])) {
     list($controller, $method) = explode('@', $routes[$uri[3]][$uri[4]]);
     $controllerInstance = new $controller();

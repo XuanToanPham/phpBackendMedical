@@ -52,8 +52,10 @@
         {
             try {
                 $stmt = $this->connection->prepare($query);
-                $styleParam = $params[0];
-                array_splice ($params, 0 , 1);
+                if($params) {
+                    $styleParam = $params[0];
+                    array_splice ($params, 0 , 1);
+                }
                 if ($stmt === false) {
                     throw new Exception("Unable to do prepared statement: " . $query);
                 }
