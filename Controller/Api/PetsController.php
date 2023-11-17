@@ -1,5 +1,5 @@
 <?php
-class CatController extends BaseController
+class PetsController extends BaseController
 {
     public function responseData ($err, $strErrorHeader ,$response) {
         if (!$err) {
@@ -35,19 +35,21 @@ class CatController extends BaseController
         $responseData = '';
         $cat = new CatsModel();
         if ($requestMethod === "POST") {
-
             try {
                 $birthdate = new DateTime($_POST["birthdate"]);
+                echo $_POST['species_id'];
                 $InfoCat = [
-                    "cat_id" => (int)$_POST["cat_id"],
-                    "name" => strip_tags($_POST["name"]),
+                    "pet_id" => (int)$_POST["cat_id"],
+                    "pet_name" => strip_tags($_POST["pet_name"]),
                     'age' => (int)$this->calculateAge($birthdate->format("Y-m-d H:i:s")),
                     'weight' => (float)$_POST["weight"],
                     'birthdate' => $birthdate->format("Y-m-d H:i:s"),
                     'color' => strip_tags($_POST["color"]),
                     'gender' => strip_tags($_POST['gender']),
-                    'owner_id' => $_POST['owner_id'] === '' ? null : $_POST['owner_id']
+                    'owner_id' => $_POST['owner_id'] === '' ? null : $_POST['owner_id'],
+                    'species_id' => $_POST['species_id'] === '' ? null : $_POST['species_id'],
                 ];
+                
                 echo json_encode($InfoCat);
                 $cat->addNewCat($InfoCat);
                 $responseData = json_encode(['Message' => 'Thêm mèo thành công']);

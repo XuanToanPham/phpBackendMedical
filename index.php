@@ -4,7 +4,7 @@ require __DIR__ . "/inc/bootstrap.php";
 $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 $uri = explode('/', $uri);
 require PROJECT_ROOT_PATH . "/Controller/Api/CheckUpTypeController.php";
-require PROJECT_ROOT_PATH . "/Controller/Api/CatController.php";
+require PROJECT_ROOT_PATH . "/Controller/Api/PetsController.php";
 
 $routes = [
     'checkuptype' => [
@@ -12,11 +12,11 @@ $routes = [
         'typeID' => 'CheckUpTypeController@getTypeByID'
     ],
     'cat' => [
-        'addCat' => 'CatController@addCat',
-        'queryAll' => 'CatController@queryAllCat',
-        'queryByOwnerId' => 'CatController@queryAllCatByIdOwner',
-        'deleteInfoCat' => 'CatController@deleteInfoCatByCatID',
-        'updateInfoCat' => 'CatController@updateInfoCat'
+        'addCat' => 'PetsController@addCat',
+        'queryAll' => 'PetsController@queryAllCat',
+        'queryByOwnerId' => 'PetsController@queryAllCatByIdOwner',
+        'deleteInfoCat' => 'PetsController@deleteInfoCatByCatID',
+        'updateInfoCat' => 'PetsController@updateInfoCat'
     ]
 ];
 if (isset($uri[3]) && isset($uri[4]) && isset($routes[$uri[3]][$uri[4]])) {
