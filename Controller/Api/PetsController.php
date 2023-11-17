@@ -37,7 +37,7 @@ class PetsController extends BaseController
         if ($requestMethod === "POST") {
             try {
                 $birthdate = new DateTime($_POST["birthdate"]);
-                echo $_POST['species_id'];
+                
                 $InfoCat = [
                     "pet_id" => (int)$_POST["cat_id"],
                     "pet_name" => strip_tags($_POST["pet_name"]),
@@ -49,8 +49,6 @@ class PetsController extends BaseController
                     'owner_id' => $_POST['owner_id'] === '' ? null : $_POST['owner_id'],
                     'species_id' => $_POST['species_id'] === '' ? null : $_POST['species_id'],
                 ];
-                
-                echo json_encode($InfoCat);
                 $cat->addNewCat($InfoCat);
                 $responseData = json_encode(['Message' => 'Thêm mèo thành công']);
             } catch (Error $e) {
