@@ -120,9 +120,3 @@ function decryptString($originalData)
     return implode('', array_map('chr', $outDecryptStr));
 }
 
-
-$encryptedData = encryptString('0918891960As.');
-echo "Encrypted: $encryptedData\n";
-
-$decryptedData = decryptString($encryptedData);
-echo "Decrypted: $decryptedData\n";

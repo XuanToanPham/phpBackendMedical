@@ -46,4 +46,18 @@ class BaseController
         echo $data;
         exit;
     }
+
+    public function responseData ($err, $strErrorHeader ,$response) {
+        if (!$err) {
+            $this->sendOutput(
+                $response,
+                array('Content-Type: application/json', 'HTTP/1.1 200 OK')
+            );
+        } else {
+            $this->sendOutput(
+                json_encode(array('error' => $err)),
+                array('Content-Type: application/json', $strErrorHeader)
+            );
+        }
+    }
 }
