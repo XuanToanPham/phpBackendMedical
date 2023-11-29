@@ -1,0 +1,17 @@
+{
+    "name": "lenovo/project-medical",
+    "autoload": {
+        "psr-4": {
+            "Lenovo\\ProjectMedical\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "PhamToanXuan",
+            "email": "phamxuantoan2710@gmail.com"
+        }
+    ],
+    "require": {
+        "firebase/php-jwt": "^6.9"
+    }
+}

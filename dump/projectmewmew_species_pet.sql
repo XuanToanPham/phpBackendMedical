@@ -16,30 +16,27 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `xrayimages`
+-- Table structure for table `species_pet`
 --
 
-DROP TABLE IF EXISTS `xrayimages`;
+DROP TABLE IF EXISTS `species_pet`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `xrayimages` (
-  `image_id` int NOT NULL AUTO_INCREMENT,
-  `image_path` varchar(255) DEFAULT NULL,
-  `description` varchar(255) DEFAULT NULL,
-  `checkup_id` int DEFAULT NULL,
-  PRIMARY KEY (`image_id`),
-  KEY `checkup_id` (`checkup_id`),
-  CONSTRAINT `xrayimages_ibfk_1` FOREIGN KEY (`checkup_id`) REFERENCES `healthcheck` (`checkup_id`)
+CREATE TABLE `species_pet` (
+  `species_id` int NOT NULL,
+  `species_name` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`species_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `xrayimages`
+-- Dumping data for table `species_pet`
 --
 
-LOCK TABLES `xrayimages` WRITE;
-/*!40000 ALTER TABLE `xrayimages` DISABLE KEYS */;
-/*!40000 ALTER TABLE `xrayimages` ENABLE KEYS */;
+LOCK TABLES `species_pet` WRITE;
+/*!40000 ALTER TABLE `species_pet` DISABLE KEYS */;
+INSERT INTO `species_pet` VALUES (1,'Cat'),(2,'Dog');
+/*!40000 ALTER TABLE `species_pet` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -51,4 +48,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-11-29 15:20:43
+-- Dump completed on 2023-11-29 15:20:44

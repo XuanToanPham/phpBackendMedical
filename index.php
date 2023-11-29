@@ -20,7 +20,8 @@ $routes = [
         'updateInfoCat' => 'PetsController@updateInfoCat'
     ],
     'auth' => [
-        'register' => 'OwnerController@registerOwner'
+        'register' => 'OwnerController@registerOwner',
+        'login' => 'OwnerController@ownerLogin'
     ]
 ];
 if (isset($uri[3]) && isset($uri[4]) && isset($routes[$uri[3]][$uri[4]])) {

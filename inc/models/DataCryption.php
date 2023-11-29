@@ -52,7 +52,6 @@ function encryptString($originalData)
     }
     $key = getKeySecret();
     $outEncryptStr = [$key + BASIC_NUM];
-    print_r ($outEncryptStr);
     $j = 0;
     $i = 0;
     $StrLen = count($textToEncrypt);

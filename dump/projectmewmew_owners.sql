@@ -28,8 +28,10 @@ CREATE TABLE `owners` (
   `email` varchar(30) DEFAULT NULL,
   `phone` varchar(15) DEFAULT NULL,
   `address` varchar(50) DEFAULT NULL,
+  `user_name` varchar(45) NOT NULL,
+  `password` varchar(45) NOT NULL,
   PRIMARY KEY (`owner_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -38,6 +40,7 @@ CREATE TABLE `owners` (
 
 LOCK TABLES `owners` WRITE;
 /*!40000 ALTER TABLE `owners` DISABLE KEYS */;
+INSERT INTO `owners` VALUES (1,'Toan','phamxuantoan2710@gmail.com','0918181818','HCMC','phamxuantoan2710','12312312'),(4,'Nị','pnnh@gmail.com','8989898989','HCMC','phamxuantoan2711',';+,*D+A*>+-*9,L/7*/,3+J');
 /*!40000 ALTER TABLE `owners` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -50,4 +53,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-11-10 16:20:12
+-- Dump completed on 2023-11-29 15:20:44

@@ -16,30 +16,29 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `xrayimages`
+-- Table structure for table `owner_roles`
 --
 
-DROP TABLE IF EXISTS `xrayimages`;
+DROP TABLE IF EXISTS `owner_roles`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `xrayimages` (
-  `image_id` int NOT NULL AUTO_INCREMENT,
-  `image_path` varchar(255) DEFAULT NULL,
-  `description` varchar(255) DEFAULT NULL,
-  `checkup_id` int DEFAULT NULL,
-  PRIMARY KEY (`image_id`),
-  KEY `checkup_id` (`checkup_id`),
-  CONSTRAINT `xrayimages_ibfk_1` FOREIGN KEY (`checkup_id`) REFERENCES `healthcheck` (`checkup_id`)
+CREATE TABLE `owner_roles` (
+  `owner_id` int NOT NULL,
+  `role_id` int NOT NULL,
+  PRIMARY KEY (`owner_id`,`role_id`),
+  KEY `role_id` (`role_id`),
+  CONSTRAINT `owner_roles_ibfk_1` FOREIGN KEY (`owner_id`) REFERENCES `owners` (`owner_id`),
+  CONSTRAINT `owner_roles_ibfk_2` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `xrayimages`
+-- Dumping data for table `owner_roles`
 --
 
-LOCK TABLES `xrayimages` WRITE;
-/*!40000 ALTER TABLE `xrayimages` DISABLE KEYS */;
-/*!40000 ALTER TABLE `xrayimages` ENABLE KEYS */;
+LOCK TABLES `owner_roles` WRITE;
+/*!40000 ALTER TABLE `owner_roles` DISABLE KEYS */;
+/*!40000 ALTER TABLE `owner_roles` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 

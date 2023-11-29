@@ -24,15 +24,15 @@ DROP TABLE IF EXISTS `healthcheck`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `healthcheck` (
   `checkup_id` int NOT NULL AUTO_INCREMENT,
-  `cat_id` int DEFAULT NULL,
+  `pet_id` int DEFAULT NULL,
   `checkup_date` datetime DEFAULT NULL,
   `vet_id` int DEFAULT NULL,
   `diagnosis` varchar(100) DEFAULT NULL,
   `vaccination_status` varchar(5) DEFAULT NULL,
   PRIMARY KEY (`checkup_id`),
-  KEY `cat_id` (`cat_id`),
+  KEY `pet_id` (`pet_id`),
   KEY `vet_id` (`vet_id`),
-  CONSTRAINT `healthcheck_ibfk_1` FOREIGN KEY (`cat_id`) REFERENCES `cats` (`cat_id`),
+  CONSTRAINT `healthcheck_ibfk_1` FOREIGN KEY (`pet_id`) REFERENCES `pets` (`pet_id`),
   CONSTRAINT `healthcheck_ibfk_2` FOREIGN KEY (`vet_id`) REFERENCES `vets` (`vet_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -55,4 +55,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-11-10 16:20:12
+-- Dump completed on 2023-11-29 15:20:43
