@@ -1,9 +1,7 @@
 <?php
-
-
 class CheckUpTypeController extends BaseController
 {
-
+    
     public function listType ()
     {
         $strErrorDesc = '';
@@ -18,6 +16,15 @@ class CheckUpTypeController extends BaseController
                 }
                 $arrUsers = $CheckUpType->getCheckUpType($intLimit);
                 $responseData = json_encode($arrUsers);
+                session_start();
+                // $secretKey = SecretKeyManager::getSecretKey();
+                if(isset($_SESSION['user_id'])) {
+                    echo "đã đăng nhập";
+                }
+                else {
+                    echo "chưa đăng nhập";
+                }
+                
             } catch (Error $e) {
                 $strErrorDesc = $e->getMessage().'Something went wrong! Please contact support.';
                 $strErrorHeader = 'HTTP/1.1 500 Internal Server Error';

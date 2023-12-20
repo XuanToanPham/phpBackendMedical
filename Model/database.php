@@ -2,12 +2,6 @@
     class Database
     {
         protected $connection = null;
-        private $host = "127.0.0.1:2502"; // Thay đổi nếu cần
-        private $db_name = "projectmewmew"; // Thay đổi thành tên cơ sở dữ liệu của bạn
-        private $username = "myadmin"; // Thay đổi thành tên người dùng của bạn
-        private $password = "0918891960As."; // Thay đổi thành mật khẩu của bạn
-        private $port = "2502"; // Thay 2502 bằng cổng của bạ
-        public $conn;
 
         public function __construct()
         {

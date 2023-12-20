@@ -1,21 +1,19 @@
 <?php
-
-$globalSecretKey = null;
-
-function generateRandomString($length = 32)
+class SecretKeyManager
 {
-    return bin2hex(random_bytes($length));
-}
+    public static function getSecretKey()
+    {
+        $sessionKey = 'secretKeySession'; // Thay thế bằng một key duy nhất
 
-function getSecretKey()
-{
-    global $globalSecretKey;
+        if (!isset($_SESSION[$sessionKey])) {
+            $_SESSION[$sessionKey] = self::generateRandomString();
+        }
 
-    if ($globalSecretKey !== null) {
-        return $globalSecretKey;
+        return $_SESSION[$sessionKey];
     }
 
-    $globalSecretKey = generateRandomString();
-
-    return $globalSecretKey;
+    private static function generateRandomString($length = 32)
+    {
+        return bin2hex(random_bytes($length));
+    }
 }

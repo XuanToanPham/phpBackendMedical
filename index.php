@@ -21,7 +21,8 @@ $routes = [
     ],
     'auth' => [
         'register' => 'OwnerController@registerOwner',
-        'login' => 'OwnerController@ownerLogin'
+        'login' => 'OwnerController@ownerLogin',
+        'logout' => 'OwnerController@ownerLogout'
     ]
 ];
 if (isset($uri[3]) && isset($uri[4]) && isset($routes[$uri[3]][$uri[4]])) {
